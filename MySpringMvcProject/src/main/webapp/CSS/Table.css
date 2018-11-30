@@ -1,0 +1,37 @@
+@charset "ISO-8859-1";
+body { background-color:#fafafa;}
+table {
+  width: 100%;
+  padding: 1px;
+  border: 1px solid black;
+}
+
+th {
+  padding: 4px;
+  border: 1px solid black;
+}
+
+td {
+  padding: 4px;
+  border: 1px solid black;
+}
+
+.sortStyle { cursor: pointer; }
+
+.ascStyle {
+  background-image: url(../img/asc.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+.descStyle {
+  background-image: url(../img/desc.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+.unsortStyle {
+  background-image: url(../img/bg.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+}
