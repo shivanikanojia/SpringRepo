@@ -26,6 +26,11 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
       
+        <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+
         
 </head>
 <body>
@@ -110,7 +115,7 @@ jQuery.fn.extend({
 
 
 
-	<section class="agile-volt">
+	<section class="agile-volt" style="overflow:hidden">
 		<div class="agile-voltheader">
 			<h1>Registration Form</h1>
 		</div>
@@ -141,6 +146,28 @@ jQuery.fn.extend({
 						<p>password :</p>
 						<input type="password" name="password" placeholder="Enter password" required autofocus>
 					</div>
+					
+					
+					<div class="agile-email">
+						<p>DOB :</p>
+						<input type="text" name="date" id="date"  required autofocus>
+						<p id="errorDate" hidden>Incorrect</p>
+						<p id="validDate" hidden>correct</p>
+						
+					</div>
+					
+				
+		
+					
+					<div class="agile-email">
+						<p>Gender :</p>
+						<p class="radio-inline"><input type="radio" name="gender" id="Female" value="Female">Female</p>
+				 	    <p class="radio-inline"><input type="radio" name="gender" id="Male" value="Male">Male</p>			
+						<p id="errorRadio" hidden>Incorrect</p>
+						<p id="validRadio" hidden>correct</p>
+					</div>
+					<br>
+					
 					<div class="agile-name">
 						<p>Contact number :</p>
 						<input type="text" name="contact" placeholder="" required autofocus>
@@ -319,7 +346,15 @@ jQuery.fn.extend({
 			</div>
 	</section>
 	
-	
+<script>
+
+		$( function() {
+		    $( "#date" ).datepicker({
+		    	format: 'mm-dd-yyyy'
+		    }); 
+		  } );
+
+</script>
 	
 	
 	

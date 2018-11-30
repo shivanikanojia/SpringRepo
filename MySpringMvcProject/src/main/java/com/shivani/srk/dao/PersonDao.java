@@ -30,5 +30,15 @@ public class PersonDao extends GenericDaoImpl<UserDetails> {
 		query.setParameter("a", integer);
 		return query.list();   
 	}
+
+	public UserDetails resetPass(String username) {
+		System.out.println("In resetPass()");
+
+		String SQL_QUERY =" from UserDetails as u where u.userName=:a ";
+		Query query = (Query) this.em.createQuery(SQL_QUERY, UserDetails.class);
+
+		query.setParameter("a", username);
+		return (UserDetails) query.getSingleResult(); 
+	}
 	
 } 

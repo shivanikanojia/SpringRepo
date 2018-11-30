@@ -1,8 +1,11 @@
 package com.shivani.srk.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -84,9 +87,29 @@ public class UserController {
 		details.setLastName(request.getParameter("lastName"));
 		details.setUserName(request.getParameter("userName"));
 		details.setEmail(request.getParameter("email"));
-		details.setPassword(request.getParameter("password"));
+		
+		String gender = request.getParameter("gender");
+		if (gender.equals("Female")) {
+			details.setGender("Female");
+		} else {
+			details.setGender("Male");
+		}
+		details.setGender(request.getParameter("gender"));
+
+		SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+
+		try {
+			Date date = format.parse(request.getParameter("date"));
+			details.setDate(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        details.setPassword(request.getParameter("password"));
 		details.setContact(request.getParameter("contact"));	
 
+		
+		
 		List<Address> addressOfUser = new ArrayList<Address>();
 
 		int i = 0;
@@ -359,4 +382,46 @@ public class UserController {
 		mv.setViewName("show");
 		return mv;
 	}
+	
+	
+
+
+	// directing to reset password page
+	@RequestScope
+	@RequestMapping( value = "/reset")
+	@Transactional
+	public ModelAndView reset(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+
+		mv.setViewName("reset");
+		return mv;
+	}
+
+	// reset password mapping
+
+	@RequestScope
+	@RequestMapping( value = "/resetPass")
+	@Transactional
+	public ModelAndView resetPass(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+
+
+		details = service.resetPass(username);
+		details.setPassword(password);
+		service.update(details);
+
+		mv.setViewName("index");
+
+		System.out.println(details);
+
+
+		return mv;
+
+
+	}
+	
+	
 }

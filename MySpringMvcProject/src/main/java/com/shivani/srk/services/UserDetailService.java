@@ -46,8 +46,20 @@ public class UserDetailService {
 		return personDAO.getFile(attribute);
 	}
 
+	@Transactional
 	public List<UserDetails> findAll(Integer integer) {
 		return personDAO.findAll(integer);
+	}
+	
+	@Transactional
+	public UserDetails resetPass(String username) {
+		return personDAO.resetPass(username);
+	}
+
+	@Transactional
+	public void update(UserDetails details) {
+		personDAO.update(details);
+		
 	}
 } 	
 

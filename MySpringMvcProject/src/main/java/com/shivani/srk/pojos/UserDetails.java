@@ -1,23 +1,21 @@
 package com.shivani.srk.pojos;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -54,6 +52,13 @@ public class UserDetails {
 	@Column(name = "contact", unique = true, nullable = false)
 	private String contact;
 	
+	@Column(name = "gender", unique = true, nullable = false)
+	private String gender;
+	
+	@Column(name = "dob", unique = true, nullable = false)
+	private Date date;
+	
+	
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade=CascadeType.ALL)
 //	@JoinTable(name="user_address", 
@@ -80,7 +85,7 @@ public class UserDetails {
 //	}
 //	public void setUserId(Integer UserId) {
 //		this.userId = userId;
-//	}\
+//	}
 	
 	
 	
@@ -148,11 +153,30 @@ public class UserDetails {
 	}
 	public void setAddress(List<Address> address) {
 		this.address = address;
+	} 
+	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
+	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	@Override
 	public String toString() {
-		return "UserDetails [firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
-				+ ", password=" + password + ", email=" + email + ", contact=" + contact + "]";
+		return "UserDetails [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="
+				+ userName + ", password=" + password + ", email=" + email + ", contact=" + contact + ", gender="
+				+ gender + ", date=" + date + ", address=" + address + "]";
 	}
 }
