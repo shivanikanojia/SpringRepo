@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.LazyCollection;
@@ -55,6 +57,8 @@ public class UserDetails {
 	@Column(name = "gender", unique = true, nullable = false)
 	private String gender;
 	
+
+    @Temporal(TemporalType.DATE)
 	@Column(name = "dob", unique = true, nullable = false)
 	private Date date;
 	
@@ -177,6 +181,6 @@ public class UserDetails {
 	public String toString() {
 		return "UserDetails [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="
 				+ userName + ", password=" + password + ", email=" + email + ", contact=" + contact + ", gender="
-				+ gender + ", date=" + date + ", address=" + address + "]";
+				+ gender + ", address=" + address + "]";
 	}
 }

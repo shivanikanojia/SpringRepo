@@ -92,7 +92,7 @@ public class Address {
 	@Override
 	public String toString() {
 		return "Address [line1=" + line1 + ", line2=" + line2 + ", city=" + city + ", State=" + State + ", zipcode="
-				+ zipcode + ", user=" + user + "]";
+				+ zipcode +"]";
 	}
 
 }

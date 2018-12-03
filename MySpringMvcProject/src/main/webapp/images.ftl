@@ -35,7 +35,7 @@
                             
                             <#if img??>
                                 <#list img as images>
-                               		<img src="${images}" alt = "my image" style="height:10em; width:10em"> 
+                               		<img src="data:image/jpg;base64,${images}" alt = "my image" style="height:10em; width:10em"> 
     	                        </#list>
     	                   </#if>
                             

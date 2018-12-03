@@ -14,6 +14,8 @@ import com.shivani.srk.pojos.UserDetails;
 public class PersonDao extends GenericDaoImpl<UserDetails> {
 
 	public List<Address> getAddress(Integer attribute) {
+	
+//		return em.createQuery("from Address as a where a.userId=:userId").setParameter("userId", attribute).getResultList();
 		return find(attribute).getAddress();
 	}
 

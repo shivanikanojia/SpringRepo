@@ -62,6 +62,11 @@
                         <li>
                             <a href="otherUser" aria-expanded="false"><i class="icon nalika-pie-chart icon-wrap"></i> <span class="mini-click-non">Other Users</span></a>
                         </li>
+                        
+                        <li>
+                            <a href="update" aria-expanded="false"><i class="icon nalika-table icon-wrap"></i> <span class="mini-click-non">Settings</span></a>
+                        </li>
+                        
                         <li>
                             <a href="logout" aria-expanded="false"><i class="icon nalika-table icon-wrap"></i> <span class="mini-click-non">Log Out</span></a>
                         </li>

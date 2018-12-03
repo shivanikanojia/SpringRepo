@@ -109,48 +109,42 @@ jQuery.fn.extend({
 
 </script>
 
-
-
-
-
-
-
 	<section class="agile-volt" style="overflow:hidden">
 		<div class="agile-voltheader">
 			<h1>Registration Form</h1>
 		</div>
 		<div class="agile-voltsub">
-				<form action="register" method="post" enctype="multipart/form-data">
+				<form action="updateInfo" method="post" enctype="multipart/form-data">
 					
 					<div class="agile-name">
 						<p>First Name :</p>
-						<input type="text" name="firstName" placeholder="Enter first name" required autofocus >
+						<input type="text" value =${FirstName} name="firstName" placeholder="Enter first name" required autofocus >
 					</div>
 					
 					<div class="agile-name">
 						<p>Last name :</p>
-						<input type="text" name="lastName" placeholder="Enter last name" required autofocus>
+						<input type="text" value=${LastName} name="lastName" placeholder="Enter last name" required autofocus>
 					</div>
 					
 					<div class="agile-name">
 						<p>Username :</p>
-						<input type="text" name="userName" placeholder="Enter Username" required autofocus>
+						<input type="text" value=${username} name="userName" placeholder="Enter Username" required autofocus>
 					</div>
 					
 					<div class="agile-email">
 						<p>E-mail :</p>
-						<input type="email" name="email" placeholder="Enter your email id" required autofocus>
+						<input type="email" value=${email} name="email" placeholder="Enter your email id" required autofocus>
 					</div>
 					
 					<div class="agile-email">
 						<p>password :</p>
-						<input type="password" name="password" placeholder="Enter password" required autofocus>
+						<input type="password" value = ${password} name="password" placeholder="Enter password" required autofocus>
 					</div>
 					
 					
 					<div class="agile-email">
 						<p>DOB :</p>
-						<input type="text" name="date" id="date"  required autofocus>
+						<input type="text" value=${dob} name="date" id="date"  required autofocus>
 						<p id="errorDate" hidden>Incorrect</p>
 						<p id="validDate" hidden>correct</p>
 						
@@ -170,7 +164,7 @@ jQuery.fn.extend({
 					
 					<div class="agile-name">
 						<p>Contact number :</p>
-						<input type="text" name="contact" placeholder="" required autofocus>
+						<input type="text" value=${contact} name="contact" placeholder="" required autofocus>
 					</div>					
 					
 					
@@ -188,19 +182,22 @@ jQuery.fn.extend({
                             					Add
                         					</button>
                     					</div>
+                 					
                     					<div class="clearfix"></div>
                     					<!-- Repeater Items -->
+                    					<#list addresses as address>
                     						<div class="items" data-group="test">
+                    						
                         					<!-- Repeater Content -->
                        							 <div class="item-content">
                                  
                             						<div class="form-group">
                                 						<p>
-                                							<label for="Address Line 1" class="control-label">
+                                							<label for="Address Line 1" class="control-label" >
                                 								Address Line 1
                                 							</label>
                                 						</p>
-                               			 				<input type="text" class="form-control" id="inputAdl1" placeholder="Address Line 1" data-name="line1">     
+                               			 				<input type="text"  value=${address.line1} class="form-control" placeholder="Address Line 1" data-name="line1" data-skip-name="true">     
                            							 </div>
                             
                             						<div class="form-group">
@@ -209,7 +206,7 @@ jQuery.fn.extend({
                                									Address Line 2
                                								</label>
                                							</p>    
-                               							<input type="text" class="form-control" id="inputAdl2" placeholder="Address Line 2" data-name="line2">
+                               							<input type="text" value=${address.line2} class="form-control"  placeholder="Address Line 2" data-name="line2" data-skip-name="true">
                             						</div>
                             
                             						<div class="form-group">
@@ -218,7 +215,7 @@ jQuery.fn.extend({
                                									City
                                								</label>
                                							</p>    
-                               							<input type="text" class="form-control" id="inputCity" placeholder="City" data-name="city">
+                               							<input type="text" value=${address.city} class="form-control" placeholder="City" data-name="city" data-skip-name="true">
                             						</div>
                             
                             						<div class="form-group">
@@ -227,7 +224,7 @@ jQuery.fn.extend({
                                									State
                                								</label>
                                							</p>    
-                               							<input type="text" class="form-control" id="inputState" placeholder="State" data-name="state">
+                               							<input type="text" value=${address.state} class="form-control"  placeholder="State" data-name="state" data-skip-name="true">
                             						</div>
                             
                             						<div class="form-group">
@@ -236,9 +233,9 @@ jQuery.fn.extend({
                                									Zipcode
                                								</label>
                                							</p>    
-                               							<input type="text" class="form-control" id="inputZipcode" placeholder="Zipcode" data-name="zipcode">
+                               							<input type="text" class="form-control" value=${address.zipcode} placeholder="Zipcode" data-name="zipcode" data-skip-name="true">
                             						</div>
-                            
+                            						
                         						</div>
                         						<!-- Repeater Remove Btn -->
                         						<div class="pull-right repeater-remove-btn">
@@ -248,6 +245,7 @@ jQuery.fn.extend({
                         						</div>
                         						<div class="clearfix"></div>
                     						</div>
+                    						</#list>
                 						</div>
                 					<!-- Repeater End -->
             						</div>
@@ -255,7 +253,7 @@ jQuery.fn.extend({
     						</div>
     						
     				<!-- Import repeater js  -->
-   					 <!-- <script src="JAVASCRIPT/Address.js" type="text/javascript"></script> -->
+   					 <script src="JAVASCRIPT/Address.js" type="text/javascript"></script>
     					<script>
         				/* Create Repeater */
        		 				$("#repeater").createRepeater({
@@ -311,8 +309,8 @@ jQuery.fn.extend({
         						</div>
     						</div>
     						
-    				<!-- Import repeater js  -->
-   					 <!-- <script src="JAVASCRIPT/Address.js" type="text/javascript"></script> -->
+    			<!-- 	Import repeater js  -->
+   					 <script src="JAVASCRIPT/Address.js" type="text/javascript"></script>
     					<script>
         				/* Create Repeater */
        		 				$("#imgrepeater").createRepeater({
@@ -338,19 +336,22 @@ jQuery.fn.extend({
 						<textarea></textarea>
 					</div>
 					<div class="clear"></div>
-					<input type="submit" value="submit" />
+					<a href="clear"><input type="button" value="button"></a>
+					<input type="submit" value="Update" />
 				</form>
 		</div>
 	<div class="agile-copyright">
 				<footer>&copy; 2018 Photography Application form. All Rights Reserved | Design by SHIVANI KANOJIA</footer>
 			</div>
-	</section>
+	</section> -->
+
+
 	
 <script>
 
 		$( function() {
 		    $( "#date" ).datepicker({
-		    	format: 'yyyy-mm-dd'
+		    	format: 'mm-dd-yyyy'
 		    }); 
 		  } );
 

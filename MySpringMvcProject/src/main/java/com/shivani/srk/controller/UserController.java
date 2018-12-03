@@ -1,6 +1,8 @@
 package com.shivani.srk.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,7 +98,7 @@ public class UserController {
 		}
 		details.setGender(request.getParameter("gender"));
 
-		SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 		try {
 			Date date = format.parse(request.getParameter("date"));
@@ -165,22 +167,15 @@ public class UserController {
 
 
 		mv.setViewName("index");
-//		mv.addObject("k", details);
-//		mv.addObject("A", addressOfUser);
 		return mv;	
 	}
 
 
 
 	@RequestMapping( value = "/direct")
-	//	@GetMapping(value="details")
+	
 	@Transactional
 	public String direct() {
-
-		//		ModelAndView mv = new ModelAndView();
-		//		mv.setViewName("registration");
-		////		mv.addObject("k", details);
-
 		return "registeration";
 	}
 
@@ -268,7 +263,7 @@ public class UserController {
 	@RequestScope
 	@RequestMapping( value = "/images")
 	@Transactional
-	public String image(ModelMap model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public String image(ModelMap model, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws SQLException {
 
 
 		if(session.getAttribute("userId")==null) {
@@ -279,13 +274,14 @@ public class UserController {
 
 		List<ImageFile> img = service.getFile((Integer)session.getAttribute("userId"));
 		System.out.println("in image controller");
-
-
-		while(img.isEmpty()!= false) {
-			System.out.println(img.get(i));
-//			model.addAttribute("img", Base64.getEncoder().encodeToString(img.get(i).getFile()));
-			i++;
+		
+		List<String> file = new ArrayList<String>();
+		
+		for(ImageFile image : img) {
+//			file.add(Base64.getEncoder().encodeToString(img.get(i).getFile().getBytes(img.indexOf(image), image.));
 		}
+		
+		model.addAttribute("img" , file);
 		return "images";
 
 	}
@@ -360,11 +356,11 @@ public class UserController {
 		return mv;
 	}
 
-	// showing details of users to admin mapping 
+	
 	@RequestScope
-	@RequestMapping( value = "/show")
+	@RequestMapping( value = "/update")
 	@Transactional
-	public ModelAndView show(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView update(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
 
 		if(session.getAttribute("userId")==null) {
@@ -372,14 +368,56 @@ public class UserController {
 			mv.setViewName("index");
 			return mv;
 		}
-		System.out.println("Showing following item");
-		System.out.println(request.getParameter("userid"));
+		
+		UserDetails details = (UserDetails) service.getData((Integer)session.getAttribute("userId"));
 
-		int id = Integer.parseInt(request.getParameter("userid"));
-		UserDetails details = (UserDetails) service.getData(id);
+		mv.setViewName("update");
+		mv.addObject("FirstName", details.getFirstName());
+		mv.addObject("LastName", details.getLastName());
+		mv.addObject("email", details.getEmail());
+		mv.addObject("username", details.getUserName());
+		mv.addObject("contact", details.getContact());
+		mv.addObject("password",details.getPassword());
+		mv.addObject("dob",details.getDate());
+		
+		List<Address> add = service.getAddress((Integer)session.getAttribute("userId"));
 
-		System.out.println(details);
-		mv.setViewName("show");
+		System.out.println(add);
+		mv.addObject("addresses", add);
+		
+		return mv;
+	}
+	
+	//update
+	
+	@RequestScope
+	@RequestMapping( value = "/updateInfo")
+	@Transactional
+	public ModelAndView updateInfo(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+
+
+		if(session.getAttribute("userId")==null) {
+
+			mv.setViewName("index");
+			return mv;
+		}
+		
+		UserDetails details = (UserDetails) service.getData((Integer)session.getAttribute("userId"));
+
+		mv.setViewName("dashboard");
+		mv.addObject("FirstName", details.getFirstName());
+		mv.addObject("LastName", details.getLastName());
+		mv.addObject("email", details.getEmail());
+		mv.addObject("username", details.getUserName());
+		mv.addObject("contact", details.getContact());
+		mv.addObject("password",details.getPassword());
+		mv.addObject("dob",details.getDate());
+		
+		List<Address> add = service.getAddress((Integer)session.getAttribute("userId"));
+
+		System.out.println(add);
+		mv.addObject("addresses", add);
+		
 		return mv;
 	}
 	
@@ -422,6 +460,8 @@ public class UserController {
 
 
 	}
+	
+	
 	
 	
 }
