@@ -35,14 +35,10 @@
 
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
-            <div class="sidebar-header">
-                <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                <strong><img src="img/logo/logosn.png" alt="" /></strong>
-            </div>
 			<div class="nalika-profile">
 				<div class="profile-dtl">
-					<a href="#"><img src="img/notification/4.jpg" alt="" /></a>
-					<h2>Lakian <span class="min-dtn">Das</span></h2>
+					<a href="#"><img src="img/logo.png" alt="" /></a>
+					<h2>Spring <span class="min-dtn">WebApp</span></h2>
 				</div>
 			</div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">

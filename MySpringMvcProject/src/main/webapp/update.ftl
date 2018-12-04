@@ -150,9 +150,6 @@ jQuery.fn.extend({
 						
 					</div>
 					
-				
-		
-					
 					<div class="agile-email">
 						<p>Gender :</p>
 						<p class="radio-inline"><input type="radio" name="gender" id="Female" value="Female">Female</p>
@@ -282,8 +279,12 @@ jQuery.fn.extend({
                     					</div>
                     					<div class="clearfix"></div>
                     					<!-- Repeater Items -->
+                    						<#if img??>
+                                <#list img as images>
                     						<div class="items" data-group="test">
                         					<!-- Repeater Content -->
+                        					
+                               		
                        							 <div class="item-content">
                                  
                             						<div class="form-group">
@@ -292,7 +293,7 @@ jQuery.fn.extend({
                                 								Display Image
                                 							</label>
                                 						</p>
-                               			 				<input type="file" class="form-control" id="inputimg" data-name="file" data-skip-name="true">     
+                           							 	<img src="data:image/jpg;base64,${images}" alt = "my image" style="height:10em; width:10em" data-skip-name="true">
                            							 </div>                            
                         						</div>
                         						<!-- Repeater Remove Btn -->
@@ -300,10 +301,14 @@ jQuery.fn.extend({
                             						<button class="btn btn-danger remove-btn">
                                 						Remove
                             						</button>
-                        						</div>
+                        						</div> 
+    	                      
                         						<div class="clearfix"></div>
+                        		
                     						</div>
-                						</div>
+                								  </#list>
+    	                   </#if>
+                								</div>
                 					<!-- Repeater End -->
             						</div>
         						</div>

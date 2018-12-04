@@ -1,13 +1,15 @@
 package com.shivani.srk.controller;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -203,6 +205,7 @@ public class UserController {
 			mv.addObject("email", details.getEmail());
 			mv.addObject("username", details.getUserName());
 			mv.addObject("contact", details.getContact());
+			
 			return mv;
 		} catch (Exception e) {
 			mv.setViewName("index");
@@ -276,9 +279,10 @@ public class UserController {
 		System.out.println("in image controller");
 		
 		List<String> file = new ArrayList<String>();
-		
-		for(ImageFile image : img) {
-//			file.add(Base64.getEncoder().encodeToString(img.get(i).getFile().getBytes(img.indexOf(image), image.));
+
+		for (Iterator<ImageFile> iterator = img.iterator(); iterator.hasNext();) {
+			Blob filedata = iterator.next().getFile();
+			file.add( Base64.getEncoder().encodeToString(filedata.getBytes(1, (int) filedata.length())));
 		}
 		
 		model.addAttribute("img" , file);
@@ -360,7 +364,7 @@ public class UserController {
 	@RequestScope
 	@RequestMapping( value = "/update")
 	@Transactional
-	public ModelAndView update(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView update(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws SQLException {
 
 
 		if(session.getAttribute("userId")==null) {
@@ -384,6 +388,20 @@ public class UserController {
 
 		System.out.println(add);
 		mv.addObject("addresses", add);
+		
+		
+		List<ImageFile> img = service.getFile((Integer)session.getAttribute("userId"));
+		System.out.println("in image controller");
+		
+		List<String> file = new ArrayList<String>();
+
+		for (Iterator<ImageFile> iterator = img.iterator(); iterator.hasNext();) {
+			Blob filedata = iterator.next().getFile();
+			file.add( Base64.getEncoder().encodeToString(filedata.getBytes(1, (int) filedata.length())));
+		}
+		
+		mv.addObject("img" , file);
+		
 		
 		return mv;
 	}
